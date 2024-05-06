@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import express from 'express'
+import cors from 'cors';
 
 import vehicleRouter from './routes/vehicle'
 import routesRouter from './routes/route'
@@ -10,6 +11,7 @@ const app = express()
 const PORT = process.env.EXPRESS_SERVER_PORT || 3000
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (_req: any, res: any) => {
     res.send('<h1>Tracking Server</h1>')
