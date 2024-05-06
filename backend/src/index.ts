@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv'
 import express from 'express'
 
 import vehicleRouter from './routes/vehicle'
+import routesRouter from './routes/route'
 
 dotenv.config()
 
@@ -15,6 +16,7 @@ app.get('/', (_req: any, res: any) => {
 })
 
 app.use('/api/v1/vehicle', vehicleRouter)
+app.use('/api/v1/route', routesRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
