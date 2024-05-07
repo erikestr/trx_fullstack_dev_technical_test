@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../organism/NavBar'
 import MapController from '../organism/MapCotroller'
 import VehicleListController from '../organism/VehicleListController'
+import SearchBar from '../molecules/SearchBar'
 
 const Tracking: React.FC = () => {
     return (
@@ -12,7 +13,7 @@ const Tracking: React.FC = () => {
             <div className='col-span-10'>
                 <div className='grid grid-cols-4 grid-rows-none auto-rows-auto h-full'>
                     <div className='col-start-1 col-end-4 min-h-4 h-4'>
-                        <p>search_bar</p>
+                        <SearchBar />
                     </div>
                     <div className='col-start-4 col-end-5 min-h-4 h-4'>
                         <p>stuff</p>
