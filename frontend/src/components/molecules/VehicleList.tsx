@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import VehicleItem, { Vehicle } from '../atoms/VehicleItem'
 import { useSearch } from '../../context/SearchProvider'
+import { useWebSocket } from '../../context/WebsocketProvider'
+import { blobToString } from '../../utils/Converters'
 
 const VehicleList: React.FC = () => {
 
     /** Search hook declaration */
     const { searchTerm } = useSearch()
+
+    /** WebSocket hook declaration */
+    const { subscribe } = useWebSocket()
 
     /** States to store vehicles */
     const [vehicles, setVehicles] = useState<Vehicle[]>([])
@@ -27,6 +32,24 @@ const VehicleList: React.FC = () => {
 
     /** @unused State to store last doc of page */
     const [currentLastDoc, setCurrentLastDoc] = useState<string>()
+
+    /**
+     * Effect to subscribe to add_vehicle channel
+     */
+    useEffect(() => {
+        subscribe('add_vehicle', (message) => {
+            blobToString(message).then(async (text: string) => {
+                const newMessage = text
+                if (newMessage == 'update_vehicle_list') {
+                    setIsLoading(true)
+                    await fetchVehiclesPaginated(currentPage, 7)
+                }
+                console.log('Received message:', newMessage)
+            }).catch((error: any) => {
+                console.error('Error converting Blob to text:', error)
+            })
+        })
+    }, [subscribe])
 
     /**
      * Effect to filter vehicles using search term

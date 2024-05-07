@@ -4,6 +4,7 @@ import VehicleCreate from '../organism/VehicleCreate'
 import VehicleListController from '../organism/VehicleListController'
 import { SearchProvider } from '../../context/SearchProvider'
 import SearchBar from '../molecules/SearchBar'
+import WebSocketProvider from '../../context/WebsocketProvider'
 
 const VehicleManager: React.FC = () => {
     return (
@@ -20,12 +21,14 @@ const VehicleManager: React.FC = () => {
                         <div className='col-start-4 col-end-5 min-h-4 h-4'>
                             <p>stuff</p>
                         </div>
-                        <div className='col-start-1 col-end-4 h-full'>
-                            <VehicleCreate />
-                        </div>
-                        <div className='col-start-4 col-end-5 h-full'>
-                            <VehicleListController title='Vehicles' />
-                        </div>
+                        <WebSocketProvider url='ws://localhost:3000'>
+                            <div className='col-start-1 col-end-4 h-full'>
+                                <VehicleCreate />
+                            </div>
+                            <div className='col-start-4 col-end-5 h-full'>
+                                <VehicleListController title='Vehicles' />
+                            </div>
+                        </WebSocketProvider>
                     </div>
                 </SearchProvider>
             </div>

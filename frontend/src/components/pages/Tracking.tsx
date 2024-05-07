@@ -4,6 +4,7 @@ import MapController from '../organism/MapCotroller'
 import VehicleListController from '../organism/VehicleListController'
 import SearchBar from '../molecules/SearchBar'
 import { SearchProvider } from '../../context/SearchProvider'
+import WebSocketProvider from '../../context/WebsocketProvider'
 
 const Tracking: React.FC = () => {
     return (
@@ -24,7 +25,9 @@ const Tracking: React.FC = () => {
                             <MapController />
                         </div>
                         <div className='col-start-4 col-end-5 h-full'>
-                            <VehicleListController title='Vehicles' />
+                            <WebSocketProvider url='ws://localhost:3000'>
+                                <VehicleListController title='Vehicles' />
+                            </WebSocketProvider>
                         </div>
                     </div>
                 </SearchProvider>

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Vehicle } from '../atoms/VehicleItem'
+import { useWebSocket } from '../../context/WebsocketProvider'
 
 const VehicleCreate: React.FC = () => {
+
+    /** WebSocket context to send message */
+    const { sendMessage } = useWebSocket()
 
     /** Vehicle state declaration, use the Vehicle interface */
     const [vehicle, setVehicle] = useState<Vehicle>({
@@ -65,6 +69,9 @@ const VehicleCreate: React.FC = () => {
                 placa: '',
                 BRAND: '',
             })
+
+            // call update list
+            await handleUpdateList()
             
             // TODO: Message to show success
             console.log('Vehicle added successfully.', await response.json())
@@ -73,6 +80,11 @@ const VehicleCreate: React.FC = () => {
             // TODO: Manage error
             console.error('Error adding vehicle:', error)
         }
+    }
+
+    /** Event to send update to Vehicle List */
+    const handleUpdateList = async () => {
+        sendMessage('update_vehicle_list')
     }
 
     return (
