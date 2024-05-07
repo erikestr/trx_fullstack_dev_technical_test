@@ -59,10 +59,14 @@ function GeojsonLayer({ routeName }: { routeName: string }) {
         if (!maps || !map)
             return
 
-        const data = new maps.Data()
-        data.loadGeoJson(`http://localhost:3000/api/v1/route/name=${routeName}`)
-        data.setMap(map)
-        setGeojson(data)
+        try {
+            const data = new maps.Data()
+            data.loadGeoJson(`http://localhost:3000/api/v1/route/name?name=r0`)
+            data.setMap(map)
+            setGeojson(data)
+        } catch (error) {
+            console.error('Error loading GeoJSON:', error)
+        }
     }, [maps, map])
 
     return null
