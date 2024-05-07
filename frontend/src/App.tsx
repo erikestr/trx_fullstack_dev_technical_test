@@ -1,11 +1,14 @@
-function App() {
+import { Route, Routes } from 'react-router-dom'
+import Tracking from './components/pages/Tracking'
 
+function App() {
   return (
-    <>
-      <div>
-        <span>Traking app</span>
-      </div>
-    </>
+    <div className='w-full h-full bg-gray-shade-400 text-white'>
+      <Routes>
+        <Route path='/' element={<Tracking />} />
+        <Route path='/tracking' element={<Tracking />} />
+      </Routes>
+    </div>
   )
 }
 
