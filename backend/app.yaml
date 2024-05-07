@@ -1,0 +1,5 @@
+runtime: nodejs20
+service: default
+env_variables:
+  FIREBASE_SERVICE_ACCOUNT_KEY: ''
+  EXPRESS_SERVER_PORT: '8080'
