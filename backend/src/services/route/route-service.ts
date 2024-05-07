@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 
-const geojsonFolder = './'
+const geojsonFolder = './../../assets/geojson/'
 
 export const getRoute = (name: string) => {
     var fileName = name
