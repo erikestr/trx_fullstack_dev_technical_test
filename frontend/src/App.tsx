@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Tracking from './components/pages/Tracking'
+import VehicleManager from './components/pages/VehicleManager'
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Tracking />} />
         <Route path='/tracking' element={<Tracking />} />
+        <Route path='/create' element={<VehicleManager />} />
       </Routes>
     </div>
   )
