@@ -3,6 +3,7 @@ import NavBar from '../organism/NavBar'
 import MapController from '../organism/MapCotroller'
 import VehicleListController from '../organism/VehicleListController'
 import SearchBar from '../molecules/SearchBar'
+import { SearchProvider } from '../../context/SearchProvider'
 
 const Tracking: React.FC = () => {
     return (
@@ -11,20 +12,22 @@ const Tracking: React.FC = () => {
                 <NavBar />
             </div>
             <div className='col-span-10'>
-                <div className='grid grid-cols-4 grid-rows-none auto-rows-auto h-full'>
-                    <div className='col-start-1 col-end-4 min-h-4 h-4'>
-                        <SearchBar />
+                <SearchProvider>
+                    <div className='grid grid-cols-4 grid-rows-none auto-rows-auto h-full'>
+                        <div className='col-start-1 col-end-4 min-h-4 h-4'>
+                            <SearchBar />
+                        </div>
+                        <div className='col-start-4 col-end-5 min-h-4 h-4'>
+                            <p>stuff</p>
+                        </div>
+                        <div className='col-start-1 col-end-4 h-full'>
+                            <MapController />
+                        </div>
+                        <div className='col-start-4 col-end-5 h-full'>
+                            <VehicleListController title='Vehicles' />
+                        </div>
                     </div>
-                    <div className='col-start-4 col-end-5 min-h-4 h-4'>
-                        <p>stuff</p>
-                    </div>
-                    <div className='col-start-1 col-end-4 h-full'>
-                        <MapController />
-                    </div>
-                    <div className='col-start-4 col-end-5 h-full'>
-                        <VehicleListController title='Vehicles' />
-                    </div>
-                </div>
+                </SearchProvider>
             </div>
         </div>
     )

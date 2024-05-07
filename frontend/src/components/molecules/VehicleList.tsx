@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import VehicleItem, { Vehicle } from '../atoms/VehicleItem'
+import { useSearch } from '../../context/SearchProvider'
 
 const VehicleList: React.FC = () => {
+
+    /** Search hook declaration */
+    const { searchTerm } = useSearch()
 
     /** States to store vehicles */
     const [vehicles, setVehicles] = useState<Vehicle[]>([])
@@ -23,6 +27,27 @@ const VehicleList: React.FC = () => {
 
     /** @unused State to store last doc of page */
     const [currentLastDoc, setCurrentLastDoc] = useState<string>()
+
+    /**
+     * Effect to filter vehicles using search term
+     * 
+     * Many fields are used to filter vehicles
+     */
+    useEffect(() => {
+        if (searchTerm) {
+            setFilter(
+                [...vehicles].filter(vehicle =>
+                    vehicle.BRAND.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    vehicle.MODEL.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    vehicle['numero economico'].toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    vehicle.placa.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    vehicle.vim.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+            )
+        }
+        else
+            setFilter(vehicles)
+    }, [searchTerm])
 
     /**
      * Efect to fetch vehicles using current page as pagination parameter
