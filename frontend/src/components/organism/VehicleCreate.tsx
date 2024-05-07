@@ -28,8 +28,6 @@ const VehicleCreate: React.FC = () => {
             ...vehicle,
             [e.target.name]: e.target.value,
         })
-        console.log(vehicle)
-
     }
 
     /**
