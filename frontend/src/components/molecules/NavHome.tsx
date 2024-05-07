@@ -1,9 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const NavHome: React.FC = () => {
+    /** Navigate hook declaration */
+    const navigate = useNavigate()
+
+    // Redirect to home page, that is in fact the tracking page
+    const handleHomeClick = () => navigate('/')
 
     return (
-        <div className='w-full h-auto p-2 flex flex-col gap-4 fill-current cursor-pointer'>
+        <div className='w-full h-auto p-2 flex flex-col gap-4 fill-current cursor-pointer' onClick={handleHomeClick}>
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 id='Capa_1'

@@ -1,14 +1,19 @@
 import React from 'react'
 import NavBarItem from '../atoms/NavBarItem'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const NavPages: React.FC = () => {
+    /** Navigate hook declaration */
+    const navigate = useNavigate()
 
-    // Event handler for the Tracking button
-    const handleTrackingClick = () => console.log('Tracking clicked');
+    /** Location hook declaration */
+    const location = useLocation()
 
-    // Event handler for the Create button
-    const handleCreateClick = () => console.log('Create clicked');
+    /** Navigation handler, redirect to tracking page */
+    const handleTrackingClick = () => navigate('/tracking')
 
+    /** Navigation handler, redirect to create vehicle page */
+    const handleCreateClick = () => navigate('/create')
 
     return (
         <div className='w-full h-auto p-2 flex flex-col gap-4'>
