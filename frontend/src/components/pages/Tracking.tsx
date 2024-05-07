@@ -7,6 +7,10 @@ import { SearchProvider } from '../../context/SearchProvider'
 import WebSocketProvider from '../../context/WebsocketProvider'
 
 const Tracking: React.FC = () => {
+
+    /** Server Url */
+    const wsUrl = import.meta.env.VITE_WS_SERVER as string
+
     return (
         <div className='w-full h-full grid grid-cols-12 auto-rows-auto'>
             <div className='col-span-2'>
@@ -25,7 +29,7 @@ const Tracking: React.FC = () => {
                             <MapController />
                         </div>
                         <div className='col-start-4 col-end-5 h-full'>
-                            <WebSocketProvider url='ws://localhost:3000'>
+                            <WebSocketProvider url={wsUrl}>
                                 <VehicleListController title='Vehicles' />
                             </WebSocketProvider>
                         </div>

@@ -16,6 +16,9 @@ const MapAtom: React.FC<MapProps> = ({ latitude, longitude }) => {
     /** Created at 'Administración de mapas' */
     const mapId = import.meta.env.VITE_GMAPS_MAPID as string
 
+    /** Api Key from G Cloud Javascript Maps, enable Directions Api is optional */
+    const serverUrl = import.meta.env.VITE_API_SERVER as string
+
     /** Config Maps Center position */
     const center = { lat: latitude, lng: longitude }
 
@@ -34,7 +37,7 @@ const MapAtom: React.FC<MapProps> = ({ latitude, longitude }) => {
                     disableDefaultUI={true}>
                     {/* <AdvancedMarker position={position} /> */}
                     {/* <Directions /> */}
-                    <GeojsonLayer routeName={hard_routeName} />
+                    <GeojsonLayer routeName={hard_routeName} serverUrl={serverUrl} />
                 </Map>
             </APIProvider>
         </div>
@@ -46,7 +49,7 @@ const MapAtom: React.FC<MapProps> = ({ latitude, longitude }) => {
  * 
  * @returns GeojsonLayer component
  */
-function GeojsonLayer({ routeName }: { routeName: string }) {
+function GeojsonLayer({ routeName, serverUrl }: { routeName: string, serverUrl: string }) {
     const map
         = useMap()
     const maps
@@ -61,7 +64,7 @@ function GeojsonLayer({ routeName }: { routeName: string }) {
 
         try {
             const data = new maps.Data()
-            data.loadGeoJson(`http://localhost:3000/api/v1/route/name?name=r0`)
+            data.loadGeoJson(`${serverUrl}/api/v1/route/name?name=${routeName}`)
             data.setMap(map)
             setGeojson(data)
         } catch (error) {

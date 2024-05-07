@@ -3,6 +3,9 @@ import { Vehicle } from '../atoms/VehicleItem'
 import { useWebSocket } from '../../context/WebsocketProvider'
 
 const VehicleCreate: React.FC = () => {
+    
+    /** Server Url */
+    const serverUrl = import.meta.env.VITE_API_SERVER as string
 
     /** WebSocket context to send message */
     const { sendMessage } = useWebSocket()
@@ -42,7 +45,7 @@ const VehicleCreate: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const response = await fetch('http://localhost:3000/api/v1/vehicle/add', {
+            const response = await fetch(`${serverUrl}/api/v1/vehicle/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

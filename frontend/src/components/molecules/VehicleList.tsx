@@ -5,6 +5,9 @@ import { useWebSocket } from '../../context/WebsocketProvider'
 import { blobToString } from '../../utils/Converters'
 
 const VehicleList: React.FC = () => {
+    
+    /** Server Url */
+    const serverUrl = import.meta.env.VITE_API_SERVER as string
 
     /** Search hook declaration */
     const { searchTerm } = useSearch()
@@ -101,7 +104,7 @@ const VehicleList: React.FC = () => {
      */
     const fetchVehiclesByLastDoc = async (pageSize: number, lastDocument?: string) => {
         try {
-            const url = `http://localhost:3000/api/v1/vehicle/list?pageSize=${pageSize}${lastDocument ? `&start=${lastDocument}` : ''}`
+            const url = `${serverUrl}/api/v1/vehicle/list?pageSize=${pageSize}${lastDocument ? `&start=${lastDocument}` : ''}`
             const response = await fetch(url)
             const data = await response.json()
             const lVehicles: Vehicle[] = data.data
@@ -123,7 +126,7 @@ const VehicleList: React.FC = () => {
      */
     const fetchVehiclesPaginated = async (pageNumber: number, pageSize: number) => {
         try {
-            const url = `http://localhost:3000/api/v1/vehicle/paginated?page=${pageNumber}&pageSize=${pageSize}`
+            const url = `${serverUrl}/api/v1/vehicle/paginated?page=${pageNumber}&pageSize=${pageSize}`
             const response = await fetch(url)
             const data = await response.json()
             const lVehicles: Vehicle[] = data.data
