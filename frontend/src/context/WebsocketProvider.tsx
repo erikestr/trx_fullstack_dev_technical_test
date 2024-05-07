@@ -41,7 +41,7 @@ const WebSocketProvider: React.FC<Props> = ({ url, children }) => {
         }
     }, [url])
 
-    const subscribe: WebSocketContextType['subscribe'] = (channelName, callback) => {
+    const subscribe: WebSocketContextType['subscribe'] = (_channelName, callback) => {
         if (socket) {
             socket.addEventListener('message', (event) => {
                 const message = event.data

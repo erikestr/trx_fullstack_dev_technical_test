@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import VehicleItem, { Vehicle } from '../atoms/VehicleItem'
 import { useSearch } from '../../context/SearchProvider'
 import { useWebSocket } from '../../context/WebsocketProvider'
@@ -29,12 +29,6 @@ const VehicleList: React.FC = () => {
 
     /** State to store loading status */
     const [isLoading, setIsLoading] = useState(true)
-
-    /** @unused State to store first doc of page */
-    const [currentFirstDoc, setCurrentFirstDoc] = useState<string>()
-
-    /** @unused State to store last doc of page */
-    const [currentLastDoc, setCurrentLastDoc] = useState<string>()
 
     /**
      * Effect to subscribe to add_vehicle channel
@@ -83,41 +77,6 @@ const VehicleList: React.FC = () => {
         fetchVehiclesPaginated(currentPage, 7)
     }, [currentPage])
 
-    /** @unused 
-     * 
-     * Efect to fetch vehicles using last document as pagination parameter
-    */
-    // useEffect(() => {
-    //     if (currentPage === 1)
-    //         fetchVehiclesByLastDoc(5)
-    //     else
-    //         fetchVehiclesByLastDoc(5, currentLastDoc)
-    // }, [currentPage])
-
-    /**
-     * @unused
-     * 
-     * Paginated fetch of vehicles using page size and last document
-     * 
-     * @param pageSize number of vehicles to show per page
-     * @param lastDocument last document of the previous page
-     */
-    const fetchVehiclesByLastDoc = async (pageSize: number, lastDocument?: string) => {
-        try {
-            const url = `${serverUrl}/api/v1/vehicle/list?pageSize=${pageSize}${lastDocument ? `&start=${lastDocument}` : ''}`
-            const response = await fetch(url)
-            const data = await response.json()
-            const lVehicles: Vehicle[] = data.data
-            setVehicles(lVehicles)
-            setFilter(lVehicles)
-            setTotalPages(data.totalPages)
-            setCurrentLastDoc(lVehicles[lVehicles.length - 1].vim)
-            setIsLoading(false)
-        } catch (error) {
-            console.error('Error fetching vehicles:', error)
-        }
-    }
-
     /**
      * Fetch vehicles paginated using page number and page size
      * 
@@ -133,7 +92,6 @@ const VehicleList: React.FC = () => {
             setVehicles(lVehicles)
             setFilter(lVehicles)
             setTotalPages(data.totalPages)
-            setCurrentLastDoc(lVehicles[lVehicles.length - 1].vim)
             setIsLoading(false)
         } catch (error) {
             console.error('Error fetching vehicles:', error)
