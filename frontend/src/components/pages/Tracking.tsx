@@ -16,8 +16,34 @@ const Tracking: React.FC = () => {
             <div className='col-span-2'>
                 <NavBar />
             </div>
-            <div className='col-span-10'>
+            <div className='col-span-10 w-full h-full flex flex-row'>
                 <SearchProvider>
+                    <div className='w-full  flex flex-col p-2 gap-2'>
+
+                        <div className='h-16 w-full '>
+                            <SearchBar />
+                        </div>
+
+                        <div className='h-full w-full '>
+                            <MapController />
+                        </div>
+
+                    </div>
+                    <div className='w-1/2 gap-2'>
+
+                        <div className='h-16 w-full hidden'>
+                            <p>stuff</p>
+                        </div>
+
+                        <div className='h-full w-full '>
+                            <WebSocketProvider url={wsUrl}>
+                                <VehicleListController title='Vehicles' />
+                            </WebSocketProvider>
+                        </div>
+
+                    </div>
+                </SearchProvider>
+                {/* 
                     <div className='grid grid-cols-4 grid-rows-none auto-rows-auto h-full'>
                         <div className='col-start-1 col-end-4 min-h-4 h-4'>
                             <SearchBar />
@@ -34,7 +60,7 @@ const Tracking: React.FC = () => {
                             </WebSocketProvider>
                         </div>
                     </div>
-                </SearchProvider>
+                </SearchProvider> */}
             </div>
         </div>
     )
