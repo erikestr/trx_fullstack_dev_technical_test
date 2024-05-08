@@ -2,6 +2,8 @@ import * as dotenv from 'dotenv'
 import express from 'express'
 import WebSocket from 'ws'
 import cors from 'cors'
+import https from 'https'
+import fs from 'fs'
 
 import vehicleRouter from './routes/vehicle'
 import routesRouter from './routes/route'
@@ -10,6 +12,13 @@ dotenv.config()
 
 const app = express()
 const PORT = process.env.EXPRESS_SERVER_PORT || 3000
+
+const httpOptions = {
+    key: fs.readFileSync('./src/assets/ssl/private.pem'),
+    cert: fs.readFileSync('./src/assets/ssl/public.pem')
+}
+
+const httpServer = https.createServer(httpOptions, app)
 
 const wsServer = new WebSocket.Server({ noServer: true })
 
@@ -38,11 +47,11 @@ app.get('/', (_req: any, res: any) => {
 app.use('/api/v1/vehicle', vehicleRouter)
 app.use('/api/v1/route', routesRouter)
 
-const server = app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
 
-server.on('upgrade', (request, socket, head) => {
+httpServer.on('upgrade', (request, socket, head) => {
     wsServer.handleUpgrade(request, socket, head, (ws) => {
         wsServer.emit('connection', ws, request)
     })
