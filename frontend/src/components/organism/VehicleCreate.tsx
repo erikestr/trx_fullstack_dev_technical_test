@@ -3,7 +3,7 @@ import { Vehicle } from '../atoms/VehicleItem'
 import { useWebSocket } from '../../context/WebsocketProvider'
 
 const VehicleCreate: React.FC = () => {
-    
+
     /** Server Url */
     const serverUrl = import.meta.env.VITE_API_SERVER as string
 
@@ -75,11 +75,11 @@ const VehicleCreate: React.FC = () => {
 
             // call update list
             await handleUpdateList()
-            
+
             // TODO: Message to show success
             console.log('Vehicle added successfully.', await response.json())
         } catch (error) {
-            
+
             // TODO: Manage error
             console.error('Error adding vehicle:', error)
         }
@@ -92,26 +92,59 @@ const VehicleCreate: React.FC = () => {
 
     return (
         <div className='container w-full p-4'>
-            <h1 className='text-2xl font-bold mb-4'>Create Vehicle</h1>
-            <form onSubmit={handleSubmit} className='w-full mx-auto'>
+            <h1 className='text-2xl font-bold'>Create Vehicle</h1>
+            <form onSubmit={handleSubmit} className='w-full mx-auto flex flex-col'>
 
-                <div className='mb-4'>
-                    <label htmlFor='BRAND' className='block text-gray-700 font-bold mb-2'>
-                        Marca
-                    </label>
-                    <input
-                        type='text'
-                        id='BRAND'
-                        name='BRAND'
-                        value={vehicle.BRAND}
-                        onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
+                <div className='w-full flex flex-row gap-4'>
+
+                    <div className='mb-2'>
+                        <label htmlFor='BRAND' className='block text-base font-bold mb-1'>
+                            Marca
+                        </label>
+                        <input
+                            type='text'
+                            id='BRAND'
+                            name='BRAND'
+                            value={vehicle.BRAND}
+                            onChange={handleChange}
+                            className='w-full px-4 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-base '
+                            required
+                        />
+                    </div>
+
+                    <div className='mb-2'>
+                        <label htmlFor='YEAR' className='block text-base font-bold mb-1'>
+                            Año
+                        </label>
+                        <input
+                            type='number'
+                            id='YEAR'
+                            name='YEAR'
+                            value={vehicle.YEAR}
+                            onChange={handleChange}
+                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                    </div>
+
+                    <div className='mb-2'>
+                        <label htmlFor='MODEL' className='block text-base font-bold mb-1'>
+                            Modelo
+                        </label>
+                        <input
+                            type='text'
+                            id='MODEL'
+                            name='MODEL'
+                            value={vehicle.MODEL}
+                            onChange={handleChange}
+                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                    </div>
                 </div>
 
-                <div className='mb-4'>
-                    <label htmlFor='placa' className='block text-gray-700 font-bold mb-2'>
+                <div className='mb-2'>
+                    <label htmlFor='placa' className='block text-base font-bold mb-1'>
                         Placa
                     </label>
                     <input
@@ -120,58 +153,13 @@ const VehicleCreate: React.FC = () => {
                         name='placa'
                         value={vehicle.placa}
                         onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                         required
                     />
                 </div>
 
-                <div className='mb-4'>
-                    <label htmlFor='YEAR' className='block text-gray-700 font-bold mb-2'>
-                        Año
-                    </label>
-                    <input
-                        type='number'
-                        id='YEAR'
-                        name='YEAR'
-                        value={vehicle.YEAR}
-                        onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-4'>
-                    <label htmlFor='vim' className='block text-gray-700 font-bold mb-2'>
-                        Número Vim
-                    </label>
-                    <input
-                        type='text'
-                        id='vim'
-                        name='vim'
-                        value={vehicle.vim}
-                        onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-4'>
-                    <label htmlFor='MODEL' className='block text-gray-700 font-bold mb-2'>
-                        Modelo
-                    </label>
-                    <input
-                        type='text'
-                        id='MODEL'
-                        name='MODEL'
-                        value={vehicle.MODEL}
-                        onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-4'>
-                    <label htmlFor='COLOR' className='block text-gray-700 font-bold mb-2'>
+                <div className='mb-2'>
+                    <label htmlFor='COLOR' className='block text-base font-bold mb-1'>
                         Color
                     </label>
                     <input
@@ -180,58 +168,60 @@ const VehicleCreate: React.FC = () => {
                         name='COLOR'
                         value={vehicle.COLOR}
                         onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                         required
                     />
                 </div>
 
-                <div className='mb-4'>
-                    <label htmlFor='asientos' className='block text-gray-700 font-bold mb-2'>
-                        Asientos
-                    </label>
-                    <input
-                        type='number'
-                        id='asientos'
-                        name='asientos'
-                        value={vehicle.asientos}
-                        onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-4'>
-                    <label htmlFor='seguro' className='block text-gray-700 font-bold mb-2'>
-                        Seguro
-                    </label>
-                    <input
-                        type='vim'
-                        id='seguro'
-                        name='seguro'
-                        value={vehicle.seguro}
-                        onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-4'>
-                    <label htmlFor='segure numebr' className='block text-gray-700 font-bold mb-2'>
-                        Número de Seguro
+                <div className='mb-2'>
+                    <label htmlFor='vim' className='block text-base font-bold mb-1'>
+                        Número Vim
                     </label>
                     <input
                         type='text'
-                        id='segure numebr'
-                        name='segure numebr'
-                        value={vehicle['segure numebr']}
+                        id='vim'
+                        name='vim'
+                        value={vehicle.vim}
                         onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                         required
                     />
                 </div>
+                <div className='w-full flex flex-row gap-4'>
 
-                <div className='mb-4'>
-                    <label htmlFor='numero economico' className='block text-gray-700 font-bold mb-2'>
+                    <div className='w-full mb-2'>
+                        <label htmlFor='seguro' className='block text-base font-bold mb-1'>
+                            Seguro
+                        </label>
+                        <input
+                            type='vim'
+                            id='seguro'
+                            name='seguro'
+                            value={vehicle.seguro}
+                            onChange={handleChange}
+                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                    </div>
+
+                    <div className='w-full mb-2'>
+                        <label htmlFor='segure numebr' className='block text-base font-bold mb-1'>
+                            Número de Seguro
+                        </label>
+                        <input
+                            type='text'
+                            id='segure numebr'
+                            name='segure numebr'
+                            value={vehicle['segure numebr']}
+                            onChange={handleChange}
+                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div className='mb-2'>
+                    <label htmlFor='numero economico' className='block text-base font-bold mb-1'>
                         Número Económico
                     </label>
                     <input
@@ -240,14 +230,29 @@ const VehicleCreate: React.FC = () => {
                         name='numero economico'
                         value={vehicle['numero economico']}
                         onChange={handleChange}
-                        className='w-full px-3 py-2 border border-base bg-gray-shade-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        required
+                    />
+                </div>
+
+                <div className='mb-2'>
+                    <label htmlFor='asientos' className='block text-base font-bold mb-1'>
+                        Asientos
+                    </label>
+                    <input
+                        type='number'
+                        id='asientos'
+                        name='asientos'
+                        value={vehicle.asientos}
+                        onChange={handleChange}
+                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                         required
                     />
                 </div>
 
                 <button
                     type='submit'
-                    className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600'
+                    className='bg-blue-500 text-white py-1 px-4 rounded-xl hover:bg-blue-600'
                 >
                     Create
                 </button>

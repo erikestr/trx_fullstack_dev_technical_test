@@ -16,7 +16,34 @@ const VehicleManager: React.FC = () => {
             <div className='col-span-2'>
                 <NavBar />
             </div>
-            <div className='col-span-10'>
+            <div className='col-span-10 w-full h-full flex flex-row'>
+                <SearchProvider>
+                    <WebSocketProvider url={wsUrl}>
+                        <div className='w-full  flex flex-col p-2 gap-2'>
+
+                            <div className='h-16 w-full '>
+                                <SearchBar />
+                            </div>
+
+                            <div className='h-full w-full '>
+                                <VehicleCreate />
+                            </div>
+
+                        </div>
+                        <div className='w-1/2 gap-2'>
+
+                            <div className='h-16 w-full hidden'>
+                                <p>stuff</p>
+                            </div>
+
+                            <div className='h-full w-full '>
+                                <VehicleListController title='Vehicles' />
+                            </div>
+
+                        </div>
+                    </WebSocketProvider>
+                </SearchProvider>
+                {/* </SearchProvider>
                 <SearchProvider>
                     <div className='grid grid-cols-4 grid-rows-none auto-rows-auto h-full'>
                         <div className='col-start-1 col-end-4 min-h-4 h-4'>
@@ -34,7 +61,7 @@ const VehicleManager: React.FC = () => {
                             </div>
                         </WebSocketProvider>
                     </div>
-                </SearchProvider>
+                </SearchProvider> */}
             </div>
         </div>
     )
