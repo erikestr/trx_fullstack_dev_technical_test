@@ -43,24 +43,6 @@ const Tracking: React.FC = () => {
 
                     </div>
                 </SearchProvider>
-                {/* 
-                    <div className='grid grid-cols-4 grid-rows-none auto-rows-auto h-full'>
-                        <div className='col-start-1 col-end-4 min-h-4 h-4'>
-                            <SearchBar />
-                        </div>
-                        <div className='col-start-4 col-end-5 min-h-4 h-4'>
-                            <p>stuff</p>
-                        </div>
-                        <div className='col-start-1 col-end-4 h-full'>
-                            <MapController />
-                        </div>
-                        <div className='col-start-4 col-end-5 h-full'>
-                            <WebSocketProvider url={wsUrl}>
-                                <VehicleListController title='Vehicles' />
-                            </WebSocketProvider>
-                        </div>
-                    </div>
-                </SearchProvider> */}
             </div>
         </div>
     )
