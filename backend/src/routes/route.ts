@@ -7,4 +7,8 @@ router.get('/name', (req, res) => {
     res.send(JSON.parse(routeService.getRoute(name)))
 })
 
+router.get('/available', (_req, res) => {
+    res.send(routeService.getAvailableRouteNames())
+})
+
 export default router
