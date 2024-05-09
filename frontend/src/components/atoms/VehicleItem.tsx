@@ -19,15 +19,17 @@ export interface Vehicle {
     sys_row_created: number
     placa: string
     BRAND: string
+    route?: string
 }
 
 
 interface VehicleProps {
     vehicle: Vehicle
     isLoading: boolean
+    onVehicleClicked: (vehicle: Vehicle) => void
 }
 
-const VehicleItem: React.FC<VehicleProps> = ({ vehicle, isLoading }) => {
+const VehicleItem: React.FC<VehicleProps> = ({ vehicle, isLoading, onVehicleClicked }) => {
     const getIconByCapacity = (capacity: number) => {
         switch (true) {
             case capacity < 16:
@@ -51,8 +53,14 @@ const VehicleItem: React.FC<VehicleProps> = ({ vehicle, isLoading }) => {
     }
     // isLoading = true
 
+    const handleVehicle = () => {
+        onVehicleClicked(vehicle)
+    }
+
     return (
-        <div className='w-full flex flex-row gap-2 p-2 items-center bg-gray-shade-100 rounded-xl my-2 hover:bg-base hover:text-gray-shade-400 transition-transform duration-75 hover:scale-105 group'>
+        <div className='w-full flex flex-row gap-2 p-2 items-center bg-gray-shade-100 rounded-xl my-2 hover:bg-base
+         hover:text-gray-shade-400 transition-transform duration-75 hover:scale-105 group'
+            onClick={handleVehicle}>
 
             {isLoading && <div className='row w-12 h-10 rounded-full bg-gray-400 animate-pulse'></div>}
             {!isLoading &&
