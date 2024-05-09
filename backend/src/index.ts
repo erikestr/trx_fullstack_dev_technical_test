@@ -12,13 +12,12 @@ dotenv.config()
 
 const app = express()
 const PORT = process.env.EXPRESS_SERVER_PORT || 3000
+const DEV_MODE = process.env.DEV_MODE || true
 
 const httpOptions = {
     key: fs.readFileSync('./src/assets/ssl/private.pem'),
     cert: fs.readFileSync('./src/assets/ssl/public.pem')
 }
-
-const httpServer = https.createServer(httpOptions, app)
 
 const wsServer = new WebSocket.Server({ noServer: true })
 
@@ -47,12 +46,26 @@ app.get('/', (_req: any, res: any) => {
 app.use('/api/v1/vehicle', vehicleRouter)
 app.use('/api/v1/route', routesRouter)
 
-httpServer.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
-
-httpServer.on('upgrade', (request, socket, head) => {
-    wsServer.handleUpgrade(request, socket, head, (ws) => {
-        wsServer.emit('connection', ws, request)
+if (DEV_MODE) {
+    const server = app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`)
     })
-})
+
+    server.on('upgrade', (request, socket, head) => {
+        wsServer.handleUpgrade(request, socket, head, (ws) => {
+            wsServer.emit('connection', ws, request)
+        })
+    })
+}
+else {
+    const httpServer = https.createServer(httpOptions, app)
+    httpServer.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`)
+    })
+
+    httpServer.on('upgrade', (request, socket, head) => {
+        wsServer.handleUpgrade(request, socket, head, (ws) => {
+            wsServer.emit('connection', ws, request)
+        })
+    })
+}
