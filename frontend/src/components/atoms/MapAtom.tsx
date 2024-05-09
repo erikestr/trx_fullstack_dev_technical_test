@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { APIProvider, Map, useMapsLibrary, useMap } from '@vis.gl/react-google-maps'
 
 import './MapAtom.css'
 import { Vehicle } from './VehicleItem'
-import { useVehicle } from '../../context/VehicleDetailProvider'
-import { json } from 'react-router-dom'
 
 interface MapProps {
     latitude: number
