@@ -9,3 +9,9 @@
   height: 100vh;
   font-family: 'Hanken Grotesk', sans-serif;
 }
+
+@layer base {
+  .es-scrollbar {
+    scrollbar-color: #0D0F11 #53565A;
+  }
+}
