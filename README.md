@@ -40,14 +40,23 @@ Design inpirated by this Dibble work:
 ![Design](https://cdn.dribbble.com/userupload/3276004/file/original-fdd63dc03fba6a396c396a651a066463.png?resize=1024x768&vertical=center)
 
 # Results
-
+<div align="center">
+    
 ### Vercel
-Frontend deployed on Vercel at the following link:
+Frontend deployed on Vercel at the following link.
+Check:
+    <a class="anchor" href="https://trx-dev-technical.vercel.app">
+        <img alt="Vercel" src="https://cdn-icons-png.flaticon.com/512/5602/5602732.png" width="64" />
+    </a>
+</div>
 
-[<style>.centered{display:flex; align-items: center;}img{background-color: #fff; padding: 1rem; border-radius:1rem;}</style><div class="centered"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/2560px-Vercel_logo_black.svg.png" width="128"/></div>](https://trx-dev-technical.vercel.app)
 
+<div align="center">
 
 ### API & Web Socket
 Backend was mounted on Google Cloud Platform. The domain was changed and SSL was added for secure connection.
-
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/19250359-79111938-4715-4640-93db-29494901404d?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D19250359-79111938-4715-4640-93db-29494901404d%26entityType%3Dcollection%26workspaceId%3D0841470f-5b91-4a7a-8df7-390cb5491029)
+Check:
+    <a class="anchor" href="https://app.getpostman.com/run-collection/19250359-79111938-4715-4640-93db-29494901404d?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D19250359-79111938-4715-4640-93db-29494901404d%26entityType%3Dcollection%26workspaceId%3D0841470f-5b91-4a7a-8df7-390cb5491029">
+        <img alt="Postman" src="https://camo.githubusercontent.com/af5915f48d85979b2b30d477f607886068eff975fa1bd6c93c7431b731648f77/68747470733a2f2f72756e2e7073746d6e2e696f2f627574746f6e2e737667" width="128" />
+    </a>
+</div>
