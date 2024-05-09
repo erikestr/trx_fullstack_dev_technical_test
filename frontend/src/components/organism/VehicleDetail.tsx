@@ -1,46 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import truck from './../../assets/icons/truck.svg'
+import red from './../../assets/icons/colors/red.svg'
 import seat from './../../assets/icons/seat.svg'
-import { Vehicle } from '../atoms/VehicleItem'
+import RoundedIcon from '../atoms/RoundedIcon'
+import Select from '../atoms/Select'
+import { useVehicle } from '../../context/VehicleDetailProvider'
+
 
 const VehicleDetail: React.FC = () => {
 
-    const vehicle: Vehicle = {
-        BRAND: '',
-        MODEL: '',
+    /** Server Url */
+    const serverUrl = import.meta.env.VITE_API_SERVER as string
 
-        YEAR: 0,
-        placa: '',
+    /** Vehicle hook declaration */
+    const { vehicle } = useVehicle()
 
-        COLOR: '',
-        asientos: 0,
+    /** State to store selected route */
+    const [_selectedRoute, setSelectedRoute] = useState('')
 
-        vim: '',
+    /** List of routes from api */
+    const [routes, setRoutes] = useState<string[]>([])
 
-        'numero economico': '',
+    /** State to store loading status */
+    const [isLoadingRoutes, setIsLoadingRoutes] = useState(true)
 
-        seguro: '',
-        'segure numebr': '',
+    /** Fetch routes available, only once time */
+    useEffect(() => {
+        if (routes && routes.length > 0)
+            return
+        setIsLoadingRoutes(true)
+        fetchRoutesAvailable()
+    })
 
-        sys_row_created: 0,
+    /**
+     * Fetch routes available from api
+     */
+    const fetchRoutesAvailable = async () => {
+
+        console.log('Fetching routes available');
+        try {
+            const url = `${serverUrl}/api/v1/route/available`
+            const response = await fetch(url)
+            const data = await response.json()
+            setRoutes(data)
+            setIsLoadingRoutes(false)
+
+        } catch (error) {
+            console.error('Error fetching vehicles:', error)
+        }
     }
 
     return (
         <div className='container w-full h-full p-4'>
             <div className="w-full h-full rounded-xl p-4 bg-gray-shade-100
                 grid grid-cols-[min-content,auto] grid-rows-[min-content,auto] gap-4">
-                <div className='w-32 h-32 bg-base rounded-full p-3'>
+
+                <div className='w-32 h-32  bg-base rounded-full p-3'>
                     <img src={truck} alt="Truck" className='w-auto' />
                 </div>
+
                 <div className='w-full h-full flex flex-row items-center justify-center'>
                     <div className='min-w-64 max-w-80'>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='font-bold'>Marca</h2>
-                            <p>Hyundai</p>
+                            <h2 className='text-base font-extralight'>Marca</h2>
+                            <p className='font-medium'>
+                                {vehicle.BRAND}
+                            </p>
                         </div>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='font-bold'>Modelo</h2>
-                            <p>Trx</p>
+                            <h2 className='text-base font-extralight'>Modelo</h2>
+                            <p className='font-medium'>
+                                {vehicle.BRAND}
+                            </p>
                         </div>
                     </div>
 
@@ -48,78 +79,92 @@ const VehicleDetail: React.FC = () => {
 
                     <div className='min-w-64 max-w-80'>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='font-bold'>Ano</h2>
-                            <p>2024</p>
+                            <h2 className='text-base font-extralight'>Ano</h2>
+                            <p className='font-medium'>
+                                {vehicle.BRAND}
+                            </p>
                         </div>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='font-bold'>Placa</h2>
-                            <p>ABC-01-D</p>
+                            <h2 className='text-base font-extralight'>Placa</h2>
+                            <p className='font-medium'>
+                                {vehicle.BRAND}
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div className="col-span-2 row-start-2">
+                <div className="col-span-2 row-start-2 h-fit">
                     <div className='w-full flex flex-col'>
 
                         <div className='w-full flex flex-row'>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='font-bold'>Color</h2>
+                                <h2 className='text-base font-extralight'>Color</h2>
                                 {/* circle with gradient of red */}
                                 <div className='flex flex-row gap-4 items-center'>
-                                    <div className='w-8 h-8 p-[0.25rem] rounded-full bg-gray-shade-200 flex flex-col justify-center items-center pb-[4px]'>
-                                        <div className='w-full h-full rounded-full bg-gradient-to-br from-red-400 to-red-600'></div>
-                                    </div>
-                                    <p>Rojo</p>
+                                    <RoundedIcon src={red} alt='Seat' className='w-8 bg-gray-shade-200 p-1' />
+                                    <p className='font-medium'>
+                                        {vehicle.BRAND}
+                                    </p>
                                 </div>
                             </div>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='font-bold'>Asientos</h2>
+                                <h2 className='text-base font-extralight'>Asientos</h2>
                                 <div className='flex flex-row gap-4 items-center'>
-                                    <div className='w-8 h-8 p-2 rounded-full bg-gray-shade-200'>
-                                        <img src={seat} alt="Seat" />
-                                    </div>
-                                    <p>4</p>
+                                    <RoundedIcon src={seat} alt='Seat' className='w-8 bg-gray-shade-200 p-2' />
+                                    <p className='font-medium'>
+                                        {vehicle.BRAND}
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
                         <div className='w-full flex flex-row'>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='font-bold'>Vim</h2>
-                                <p>ASDFGHJKL-QWERTYUI-ZXCVBN</p>
+                                <h2 className='text-base font-extralight'>Vim</h2>
+                                {/* <div className='w-auto h-auto p-1 bg-metalic bg-cover rounded-lg contrast-150
+                                flex items-center justify-center'>
+                                    <p className='px-2 py-0 font-solway text-xl font-extralight text-white bg-gray-shade-100 rounded-lg contrast-75'>ASDFGHJKL-QWERTYUI-ZXCVBN</p>
+                                </div> */}
+                                <p className='px-2 py-0 font-solway text-xl font-extralight text-white bg-gray-shade-100 rounded-lg contrast-75'>
+                                    {vehicle.BRAND}
+                                </p>
                             </div>
                         </div>
 
                         <div className='w-full flex flex-row'>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='font-bold'>Numero economico</h2>
-                                <p>ASDFGHJKL-QWERTYUI-ZXCVBN</p>
+                                <h2 className='text-base font-extralight '>Numero economico</h2>
+                                <p className='px-2 py-0 font-solway text-xl font-extralight text-white bg-gray-shade-100 rounded-lg contrast-75'>
+                                    {vehicle.BRAND}
+                                </p>
                             </div>
                         </div>
 
                         <div className='w-full flex flex-row'>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='font-bold'>Seguro</h2>
-                                <p>Metlife</p>
+                                <h2 className='text-base font-extralight'>Seguro</h2>
+                                <p className='font-medium'>
+                                    {vehicle.BRAND}
+                                </p>
                             </div>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='font-bold'>Numero de Seguro</h2>
-                                <p>1234567</p>
+                                <h2 className='text-base font-extralight'>Numero de Seguro</h2>
+                                <p className='font-medium'>
+                                    {vehicle.BRAND}
+                                </p>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <div className="col-span-2 row-start-3">
-                    <h2>Asignar</h2>
+                <div className='col-span-2 row-start-3 w-full h-auto flex items-center'>
+                    <span className='w-full h-2 rounded-full bg-gray-shade-200'></span>
+                </div>
 
-                    <div>
-                        <select name="driver" id="driver" className='w-full p-2 my-2 rounded-lg'>
-                            <option value="1">Driver 1</option>
-                            <option value="2">Driver 2</option>
-                        </select>
-                    </div>
+                <div className="col-span-2 row-start-4 h-full">
+                    <h2 className='mb-4 text-base'>Assign Route</h2>
+                    <Select caption='Select Route' options={routes} setSelected={setSelectedRoute} selected={vehicle.route} isLoading={isLoadingRoutes} />
                 </div>
             </div>
         </div>
