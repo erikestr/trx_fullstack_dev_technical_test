@@ -1,38 +1,53 @@
-# Technical Test - Fullstack Developer
+# Technical Test for Fullstack Developer Position
 
-Welcome to the technical test for the Fullstack Developer position at Traxi!
+## Infrastructure
+This project was developed by Erik Estrada for the technical test of the Fullstack Developer position at Traxion, using the following technologies:
 
-In this test, you will have the opportunity to demonstrate your skills and knowledge in web application development. Please read the instructions and requirements carefully before you begin.
+- **Frontend**: Develop on React.js.
+    - **Arch**: Atomic Design.
+    - **Packages used**: 
+        - **@vis.gl/react-google-maps**: For Google Maps.
+        - **React-Router-Dom**: For Routing.
+        - **TailwindCss**: For styling.
 
-Remember, this test is designed to evaluate your skills and experience. We recommend following development best practices and maintaining clean, well-structured code.
+    - **Functionality**:
+        - **Tracking**: Show the route of a vehicle in a Google Map.
+        - **Map Geojson**: Load a Geojson file to show the route.
+        - **Create Vehicle**: Form to create a new vehicle.
+        - **Vehicle Details**: Shows the details of a vehicle.
+        - **Vehicle List**: Shows a list of all vehicles using server side pagination.
+        - **Search**: To search for vehicles on the list.
+        - **Web Socket Client**: To receive real-time updates.
+- **Backend**: Develop on Node.js.
+    - **Packages used**:
+        - **Express**: To create the server.
+        - **Firebase-admin**: For connection to Firebase.
+        - **WebSocket**: For real-time communication.
+        - **Cors**: For Cross-Origin Resource Sharing.
+        - **Dotenv**: To load environment variables.
+        - 
+    - **Functionality**:
+        - **Api Routes**: Serve access to data related to Routes.
+        - **Api Vehicles**: Serve access to data related to Vehicles.
+        - **Web Socket Server**: Listens for changes and sends them to the client.
+        - **SSL**: SSS was eneabled for secure connection.
 
-Good luck! We look forward to seeing your talent in action!
+  - **Database**: Deployed on Firebase.
 
-## Instructions
+## Design
+Design inpirated by this Dibble work:
 
-1. Fork this repository to your personal GitHub account.
-2. Clone the forked repository to your local machine.
-3. Create a new branch for this test.
-4. Follow the instructions provided in the [challenge](challenge.md) file to complete the test.
-5. Make frequent commits as you progress through the development.
-6. Once you are done, push your changes to your forked repository.
-7. Create a pull request in your own repository to merge the changes from your branch into the main branch of your forked repository.
-8. Share the link to your forked repository and the pull request with us.
+![Design](https://cdn.dribbble.com/userupload/3276004/file/original-fdd63dc03fba6a396c396a651a066463.png?resize=1024x768&vertical=center)
 
-## Requirements
+# Results
 
-- Proficiency in frontend web development using:
-    - JavaScript, preferably TypeScript.
-    - ReactJS and/or Next.js.
-- Experience in backend development using:
-    - Node.js
-    - Express
-    - Any database for data persistence and manipulation
-- Familiarity with version control tools such as Git.
+### Vercel
+Frontend deployed on Vercel at the following link:
 
-If you have any questions or need clarification, feel free to contact us - we're here to help!
+[<style>.centered{display:flex; align-items: center;}img{background-color: #fff; padding: 1rem; border-radius:1rem;}</style><div class="centered"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/2560px-Vercel_logo_black.svg.png" width="128"/></div>](https://trx-dev-technical.vercel.app)
 
-Enjoy the technical test!
 
-Best regards,
-The Traxi Tech Team ❤️
+### API & Web Socket
+Backend was mounted on Google Cloud Platform. The domain was changed and SSL was added for secure connection.
+
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/19250359-79111938-4715-4640-93db-29494901404d?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D19250359-79111938-4715-4640-93db-29494901404d%26entityType%3Dcollection%26workspaceId%3D0841470f-5b91-4a7a-8df7-390cb5491029)
