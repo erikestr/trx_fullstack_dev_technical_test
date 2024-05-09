@@ -62,15 +62,15 @@ const VehicleDetail: React.FC = () => {
                 <div className='w-full h-full flex flex-row items-center justify-center'>
                     <div className='min-w-64 max-w-80'>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='text-base font-extralight'>Marca</h2>
+                            <h2 className='text-base font-extralight'>Brand</h2>
                             <p className='font-medium'>
                                 {vehicle.BRAND}
                             </p>
                         </div>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='text-base font-extralight'>Modelo</h2>
+                            <h2 className='text-base font-extralight'>Model</h2>
                             <p className='font-medium'>
-                                {vehicle.BRAND}
+                                {vehicle.MODEL}
                             </p>
                         </div>
                     </div>
@@ -79,15 +79,15 @@ const VehicleDetail: React.FC = () => {
 
                     <div className='min-w-64 max-w-80'>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='text-base font-extralight'>Ano</h2>
+                            <h2 className='text-base font-extralight'>Year</h2>
                             <p className='font-medium'>
-                                {vehicle.BRAND}
+                                {vehicle.YEAR}
                             </p>
                         </div>
                         <div className='w-full m-2 flex flex-col items-center'>
-                            <h2 className='text-base font-extralight'>Placa</h2>
+                            <h2 className='text-base font-extralight'>Plate</h2>
                             <p className='font-medium'>
-                                {vehicle.BRAND}
+                                {vehicle.placa}
                             </p>
                         </div>
                     </div>
@@ -103,16 +103,16 @@ const VehicleDetail: React.FC = () => {
                                 <div className='flex flex-row gap-4 items-center'>
                                     <RoundedIcon src={red} alt='Seat' className='w-8 bg-gray-shade-200 p-1' />
                                     <p className='font-medium'>
-                                        {vehicle.BRAND}
+                                        {vehicle.COLOR}
                                     </p>
                                 </div>
                             </div>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='text-base font-extralight'>Asientos</h2>
+                                <h2 className='text-base font-extralight'>Capacity</h2>
                                 <div className='flex flex-row gap-4 items-center'>
                                     <RoundedIcon src={seat} alt='Seat' className='w-8 bg-gray-shade-200 p-2' />
                                     <p className='font-medium'>
-                                        {vehicle.BRAND}
+                                        {vehicle.asientos}
                                     </p>
                                 </div>
                             </div>
@@ -126,31 +126,31 @@ const VehicleDetail: React.FC = () => {
                                     <p className='px-2 py-0 font-solway text-xl font-extralight text-white bg-gray-shade-100 rounded-lg contrast-75'>ASDFGHJKL-QWERTYUI-ZXCVBN</p>
                                 </div> */}
                                 <p className='px-2 py-0 font-solway text-xl font-extralight text-white bg-gray-shade-100 rounded-lg contrast-75'>
-                                    {vehicle.BRAND}
+                                    {vehicle.vim}
                                 </p>
                             </div>
                         </div>
 
                         <div className='w-full flex flex-row'>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='text-base font-extralight '>Numero economico</h2>
+                                <h2 className='text-base font-extralight '>Economic Number</h2>
                                 <p className='px-2 py-0 font-solway text-xl font-extralight text-white bg-gray-shade-100 rounded-lg contrast-75'>
-                                    {vehicle.BRAND}
+                                    {vehicle['numero economico']}
                                 </p>
                             </div>
                         </div>
 
                         <div className='w-full flex flex-row'>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='text-base font-extralight'>Seguro</h2>
+                                <h2 className='text-base font-extralight'>Insurance</h2>
                                 <p className='font-medium'>
-                                    {vehicle.BRAND}
+                                    {vehicle.seguro}
                                 </p>
                             </div>
                             <div className='w-full m-2 flex flex-col items-center'>
-                                <h2 className='text-base font-extralight'>Numero de Seguro</h2>
+                                <h2 className='text-base font-extralight'>Insurance Number</h2>
                                 <p className='font-medium'>
-                                    {vehicle.BRAND}
+                                    {vehicle['segure numebr']}
                                 </p>
                             </div>
                         </div>
