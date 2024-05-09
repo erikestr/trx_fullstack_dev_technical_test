@@ -30,7 +30,14 @@ export default {
         'gray-tint-300': '#818588',
         'gray-tint-400': '#909597',
         'gray-tint-500': '#9FA2A6',
-      }
+      },
+      backgroundImage: {
+        'metalic': "url('./src/assets/images/pitted-metal_roughness.png')",
+      },
+      fontFamily: {
+        solway: ["Solway", "serif"],
+        hanken: ["Hanken Grotesk", "sans-serif"],
+      },
     },
   },
   plugins: [],
