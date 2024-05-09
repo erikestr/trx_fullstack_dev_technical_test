@@ -53,6 +53,8 @@ Check:
 
 <div align="center">
 
+![erikestr](https://i.imgur.com/HFAE7J6.png)
+
 ### API & Web Socket
 Backend was mounted on Google Cloud Platform. The domain was changed and SSL was added for secure connection.
 Check:
