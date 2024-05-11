@@ -3,6 +3,7 @@ import VehicleItem, { Vehicle } from '../atoms/VehicleItem'
 import { useSearch } from '../../context/SearchProvider'
 import { useWebSocket } from '../../context/WebsocketProvider'
 import { blobToString } from '../../utils/Converters'
+import { useVehicle } from '../../context/VehicleDetailProvider'
 
 const VehicleList: React.FC = () => {
     
@@ -11,6 +12,9 @@ const VehicleList: React.FC = () => {
 
     /** Search hook declaration */
     const { searchTerm } = useSearch()
+
+    /** Vehicle hook declaration */
+    const { setVehicle } = useVehicle()
 
     /** WebSocket hook declaration */
     const { subscribe } = useWebSocket()
@@ -103,11 +107,15 @@ const VehicleList: React.FC = () => {
         setCurrentPage(page)
     }
 
+    const handleVehicle = (vehicle: Vehicle) => {
+        setVehicle(vehicle)
+    }
+
     return (
         <div className='flex flex-col justify-between h-full'>
             <div className='flex-none'>
                 {filter.map((vehicle: Vehicle) => (
-                    <VehicleItem key={vehicle.vim} vehicle={vehicle} isLoading={isLoading} />
+                    <VehicleItem key={vehicle.vim} vehicle={vehicle} isLoading={isLoading} onVehicleClicked={handleVehicle} />
                 ))}
             </div>
             <div className='flex-grow flex flex-row gap-2 justify-center mt-4'>

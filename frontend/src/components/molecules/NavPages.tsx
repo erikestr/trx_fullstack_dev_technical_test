@@ -15,12 +15,17 @@ const NavPages: React.FC = () => {
     /** Navigation handler, redirect to create vehicle page */
     const handleCreateClick = () => navigate('/create')
 
+    /** Navigation handler, redirect to vehicle detail page */
+    const handleDetailClick = () => navigate('/detail')
+
     return (
         <div className='w-full h-auto p-2 flex flex-col gap-4'>
             <NavBarItem text='Tracking' icon='🗺' onClick={handleTrackingClick}
                 isCurrent={location.pathname === '/tracking' || location.pathname === '/'} />
             <NavBarItem text='Create Vehicle' icon='➕' onClick={handleCreateClick}
                 isCurrent={location.pathname === '/create'} />
+            <NavBarItem text='Vehicle Detail' icon='📃' onClick={handleDetailClick}
+                isCurrent={location.pathname === '/detail'} />
         </div>
     )
 }

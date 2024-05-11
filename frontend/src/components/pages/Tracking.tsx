@@ -5,6 +5,7 @@ import VehicleListController from '../organism/VehicleListController'
 import SearchBar from '../molecules/SearchBar'
 import { SearchProvider } from '../../context/SearchProvider'
 import WebSocketProvider from '../../context/WebsocketProvider'
+import { VehicleDetailContextTypeProvider } from '../../context/VehicleDetailProvider'
 
 const Tracking: React.FC = () => {
 
@@ -18,30 +19,32 @@ const Tracking: React.FC = () => {
             </div>
             <div className='col-span-10 w-full h-full flex flex-row'>
                 <SearchProvider>
-                    <div className='w-full  flex flex-col p-2 gap-2'>
+                    <VehicleDetailContextTypeProvider>
+                        <div className='w-full  flex flex-col p-2 gap-2'>
 
-                        <div className='h-16 w-full '>
-                            <SearchBar />
+                            <div className='h-16 w-full '>
+                                <SearchBar />
+                            </div>
+
+                            <div className='h-full w-full '>
+                                <MapController />
+                            </div>
+
                         </div>
+                        <div className='w-1/2 gap-2'>
 
-                        <div className='h-full w-full '>
-                            <MapController />
+                            <div className='h-16 w-full hidden'>
+                                <p>stuff</p>
+                            </div>
+
+                            <div className='h-full w-full '>
+                                <WebSocketProvider url={wsUrl}>
+                                    <VehicleListController title='Vehicles' />
+                                </WebSocketProvider>
+                            </div>
+
                         </div>
-
-                    </div>
-                    <div className='w-1/2 gap-2'>
-
-                        <div className='h-16 w-full hidden'>
-                            <p>stuff</p>
-                        </div>
-
-                        <div className='h-full w-full '>
-                            <WebSocketProvider url={wsUrl}>
-                                <VehicleListController title='Vehicles' />
-                            </WebSocketProvider>
-                        </div>
-
-                    </div>
+                    </VehicleDetailContextTypeProvider>
                 </SearchProvider>
             </div>
         </div>
