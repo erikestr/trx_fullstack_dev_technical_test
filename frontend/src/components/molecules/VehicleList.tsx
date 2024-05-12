@@ -38,7 +38,7 @@ const VehicleList: React.FC = () => {
      * Effect to subscribe to add_vehicle channel
      */
     useEffect(() => {
-        subscribe('add_vehicle', (message) => {
+        subscribe('update_vehicle_list', (message) => {
             blobToString(message).then(async (text: string) => {
                 const newMessage = text
                 if (newMessage == 'update_vehicle_list') {
@@ -122,7 +122,7 @@ const VehicleList: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, index) => (
 
                     <button key={index + 1} onClick={() => handlePageChange(index + 1)}
-                        className={`bg-gray-shade-100 text-white rounded-full mx-1 px-2 hover:ring-2 hover:ring-base-gray
+                        className={`bg-base text-white rounded-full mx-1 px-2 hover:ring-2 hover:ring-base-gray
                         ${currentPage == index + 1 ? 'bg-base text-gray-shade-400' : ''}`}>
                         {index + 1}
                     </button>

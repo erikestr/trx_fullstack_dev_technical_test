@@ -55,16 +55,25 @@ export const getTotalVehicles = async (): Promise<number> => {
 }
 
 export const addVehicle = async (vehicle: any) => {
-    const collectionRef = db.collection('vehicles');
-    const lastDoc = await collectionRef.orderBy('sys_row_id', 'desc').limit(1).get();
-    let lastId = 0;
+    const collectionRef = db.collection('vehicles')
+    const docRef = collectionRef.doc(vehicle.vim)
+    const doc = await docRef.get()
+    console.log(doc);
+
+    if (!doc.exists) {
+        return null
+    }
+    
+    const lastDoc = await collectionRef.orderBy('sys_row_id', 'desc').limit(1).get()
+    let lastId = 0
 
     if (!lastDoc.empty) {
-        lastId = parseInt(lastDoc.docs[0].id) + 1;
+        lastId = parseInt(lastDoc.docs[0].id) + 1
     }
     else
         lastId++
 
+    vehicle.route = vehicle.route || null
     vehicle.sys_row_created = Date.now()
     vehicle.sys_row_id = lastId
     return await admin
@@ -76,6 +85,42 @@ export const addVehicle = async (vehicle: any) => {
             console.log('Added document with ID: ', lastId.toString())
             return lastId.toString()
         })
+}
+
+
+export const updateVehicle = async (vehicle: any) => {
+    console.log(vehicle.route)
+    
+    const collectionRef = db.collection('vehicles')
+    const docRef = collectionRef.doc(vehicle.sys_row_id.toString())
+    const doc = await docRef.get()
+
+    if (doc.exists) {
+        // Document already exists, update it
+        await docRef.update(vehicle)
+        console.log('Updated document with ID: ', vehicle.sys_row_id.toString())
+        return vehicle.sys_row_id.toString()
+    } else {
+        // Document doesn't exist, add it
+        await docRef.set(vehicle)
+        console.log('Added document with ID: ', vehicle.sys_row_id.toString())
+        return vehicle.sys_row_id.toString()
+    }
+}
+
+export const deleteVehicle = async (vehicle: any) => {
+    const collectionRef = db.collection('vehicles')
+    const docRef = collectionRef.doc(vehicle.sys_row_id.toString())
+    const doc = await docRef.get()
+
+    if (doc.exists) {
+        await docRef.delete()
+        console.log('Deleted document with ID: ', vehicle.sys_row_id.toString())
+        return vehicle.sys_row_id.toString()
+    } else {
+        console.error('Document does not exist')
+        return null
+    }
 }
 
 export const getLastId = async () => {
@@ -99,30 +144,31 @@ export const getLastId = async () => {
 }
 
 export const bulkVehicles = async (vehicles: any[]) => {
-    const batch = db.batch();
-    const collectionRef = db.collection('vehicles');
+    const batch = db.batch()
+    const collectionRef = db.collection('vehicles')
 
     try {
-        const lastDoc = await collectionRef.orderBy('sys_row_id', 'desc').limit(1).get();
-        let lastId = 0;
+        const lastDoc = await collectionRef.orderBy('sys_row_id', 'desc').limit(1).get()
+        let lastId = 0
 
         if (!lastDoc.empty) {
-            lastId = parseInt(lastDoc.docs[0].id) + 1;
+            lastId = parseInt(lastDoc.docs[0].id) + 1
         }
         else
             lastId++
         vehicles.forEach(data => {
-            data.sys_row_created = Date.now();
-            data.sys_row_id = lastId;
-            const docRef = collectionRef.doc(lastId.toString());
-            batch.set(docRef, data);
-            lastId++;
-        });
+            data.route = data.route || null
+            data.sys_row_created = Date.now()
+            data.sys_row_id = lastId
+            const docRef = collectionRef.doc(lastId.toString())
+            batch.set(docRef, data)
+            lastId++
+        })
 
-        await batch.commit();
+        await batch.commit()
 
-        console.log('Documentos insertados correctamente.');
+        console.log('Documentos insertados correctamente.')
     } catch (error) {
-        console.error('Error al insertar documentos:', error);
+        console.error('Error al insertar documentos:', error)
     }
 }
