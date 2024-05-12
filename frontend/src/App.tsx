@@ -5,7 +5,7 @@ import VehicleAssign from './components/pages/VehicleAssign'
 
 function App() {
   return (
-    <div className='w-full h-full bg-gray-shade-400 text-white'>
+    <div className='w-full h-full'>
       <Routes>
         <Route path='/' element={<Tracking />} />
         <Route path='/tracking' element={<Tracking />} />
