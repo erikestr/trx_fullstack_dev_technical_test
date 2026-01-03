@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Vehicle } from '../atoms/VehicleItem'
 import { useWebSocket } from '../../context/WebsocketProvider'
+import InputCommon from '../atoms/InputCommon'
+import ButtonCommon from '../atoms/ButtonCommon'
 
 const VehicleCreate: React.FC = () => {
 
@@ -31,9 +33,12 @@ const VehicleCreate: React.FC = () => {
      * @param e event handler to get input value
      */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type } = e.target
+        const parsedValue = type === 'number' ? Number(value) : value
+
         setVehicle({
             ...vehicle,
-            [e.target.name]: e.target.value,
+            [name]: parsedValue,
         })
     }
 
@@ -91,171 +96,119 @@ const VehicleCreate: React.FC = () => {
     }
 
     return (
-        <div className='container w-full p-4'>
+        <div className='container max-w-2xl p-2 flex flex-col gap-4'>
             <h1 className='text-2xl font-bold'>Create Vehicle</h1>
-            <form onSubmit={handleSubmit} className='w-full mx-auto flex flex-col'>
+            <form onSubmit={handleSubmit} className='w-full mx-auto flex flex-col gap-4'>
 
-                <div className='w-full flex flex-row gap-4'>
-
-                    <div className='mb-2'>
-                        <label htmlFor='BRAND' className='block text-base font-bold mb-1'>
-                            Marca
-                        </label>
-                        <input
-                            type='text'
-                            id='BRAND'
-                            name='BRAND'
-                            value={vehicle.BRAND}
-                            onChange={handleChange}
-                            className='w-full px-4 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-base '
-                            required
-                        />
-                    </div>
-
-                    <div className='mb-2'>
-                        <label htmlFor='YEAR' className='block text-base font-bold mb-1'>
-                            Año
-                        </label>
-                        <input
-                            type='number'
-                            id='YEAR'
-                            name='YEAR'
-                            value={vehicle.YEAR}
-                            onChange={handleChange}
-                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            required
-                        />
-                    </div>
-
-                    <div className='mb-2'>
-                        <label htmlFor='MODEL' className='block text-base font-bold mb-1'>
-                            Modelo
-                        </label>
-                        <input
-                            type='text'
-                            id='MODEL'
-                            name='MODEL'
-                            value={vehicle.MODEL}
-                            onChange={handleChange}
-                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            required
-                        />
-                    </div>
-                </div>
-
-                <div className='mb-2'>
-                    <label htmlFor='placa' className='block text-base font-bold mb-1'>
-                        Placa
-                    </label>
-                    <input
-                        type='text'
-                        id='placa'
-                        name='placa'
-                        value={vehicle.placa}
+                <div className='w-full flex flex-row gap-6'>
+                    <InputCommon
+                        id='BRAND'
+                        label='Marca'
+                        name='BRAND'
+                        value={vehicle.BRAND}
                         onChange={handleChange}
-                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                         required
+                        className='w-full'
                     />
-                </div>
-
-                <div className='mb-2'>
-                    <label htmlFor='COLOR' className='block text-base font-bold mb-1'>
-                        Color
-                    </label>
-                    <input
-                        type='text'
-                        id='COLOR'
-                        name='COLOR'
-                        value={vehicle.COLOR}
+                    <InputCommon
+                        id='YEAR'
+                        label='Año'
+                        name='YEAR'
+                        value={vehicle.YEAR}
                         onChange={handleChange}
-                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-2'>
-                    <label htmlFor='vim' className='block text-base font-bold mb-1'>
-                        Número Vim
-                    </label>
-                    <input
-                        type='text'
-                        id='vim'
-                        name='vim'
-                        value={vehicle.vim}
-                        onChange={handleChange}
-                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-                <div className='w-full flex flex-row gap-4'>
-
-                    <div className='w-full mb-2'>
-                        <label htmlFor='seguro' className='block text-base font-bold mb-1'>
-                            Seguro
-                        </label>
-                        <input
-                            type='vim'
-                            id='seguro'
-                            name='seguro'
-                            value={vehicle.seguro}
-                            onChange={handleChange}
-                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            required
-                        />
-                    </div>
-
-                    <div className='w-full mb-2'>
-                        <label htmlFor='segure numebr' className='block text-base font-bold mb-1'>
-                            Número de Seguro
-                        </label>
-                        <input
-                            type='text'
-                            id='segure numebr'
-                            name='segure numebr'
-                            value={vehicle['segure numebr']}
-                            onChange={handleChange}
-                            className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            required
-                        />
-                    </div>
-                </div>
-
-                <div className='mb-2'>
-                    <label htmlFor='numero economico' className='block text-base font-bold mb-1'>
-                        Número Económico
-                    </label>
-                    <input
-                        type='text'
-                        id='numero economico'
-                        name='numero economico'
-                        value={vehicle['numero economico']}
-                        onChange={handleChange}
-                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
-                        required
-                    />
-                </div>
-
-                <div className='mb-2'>
-                    <label htmlFor='asientos' className='block text-base font-bold mb-1'>
-                        Asientos
-                    </label>
-                    <input
                         type='number'
-                        id='asientos'
-                        name='asientos'
-                        value={vehicle.asientos}
-                        onChange={handleChange}
-                        className='w-full px-3 py-1 border border-base bg-gray-shade-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        min={0}
                         required
+                        className='w-full'
+                        inputMode='numeric'
+                    />
+                    <InputCommon
+                        id='MODEL'
+                        label='Modelo'
+                        name='MODEL'
+                        value={vehicle.MODEL}
+                        onChange={handleChange}
+                        required
+                        className='w-full'
                     />
                 </div>
 
-                <button
-                    type='submit'
-                    className='bg-blue-500 text-white py-1 px-4 rounded-xl hover:bg-blue-600'
-                >
-                    Create
-                </button>
+                <InputCommon
+                    id='placa'
+                    label='Placa'
+                    name='placa'
+                    value={vehicle.placa}
+                    onChange={handleChange}
+                    required
+                    className='w-full'
+                />
+
+                <InputCommon
+                    id='COLOR'
+                    label='Color'
+                    name='COLOR'
+                    value={vehicle.COLOR}
+                    onChange={handleChange}
+                    required
+                    className='w-full'
+                />
+
+                <InputCommon
+                    id='vim'
+                    label='Número Vim'
+                    name='vim'
+                    value={vehicle.vim}
+                    onChange={handleChange}
+                    required
+                    className='w-full'
+                />
+
+                <div className='w-full flex flex-row gap-6'>
+                    <InputCommon
+                        id='seguro'
+                        label='Seguro'
+                        name='seguro'
+                        value={vehicle.seguro}
+                        onChange={handleChange}
+                        required
+                        className='w-full'
+                    />
+
+                    <InputCommon
+                        id='segure numebr'
+                        label='Número de Seguro'
+                        name='segure numebr'
+                        value={vehicle['segure numebr']}
+                        onChange={handleChange}
+                        required
+                        className='w-full'
+                    />
+                </div>
+
+                <InputCommon
+                    id='numero economico'
+                    label='Número Económico'
+                    name='numero economico'
+                    value={vehicle['numero economico']}
+                    onChange={handleChange}
+                    required
+                    className='w-full'
+                />
+
+                <InputCommon
+                    id='asientos'
+                    label='Asientos'
+                    name='asientos'
+                    value={vehicle.asientos}
+                    onChange={handleChange}
+                    type='number'
+                    min={0}
+                    required
+                    className='w-full'
+                    inputMode='numeric'
+                />
+
+                <ButtonCommon label="Create" type="submit" />
             </form>
         </div>
     )
